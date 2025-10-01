@@ -8,6 +8,8 @@ import ru.skillbox.currency.exchange.entity.Currency;
 import ru.skillbox.currency.exchange.mapper.CurrencyMapper;
 import ru.skillbox.currency.exchange.repository.CurrencyRepository;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -19,6 +21,10 @@ public class CurrencyService {
         log.info("CurrencyService method getById executed");
         Currency currency = repository.findById(id).orElseThrow(() -> new RuntimeException("Currency not found with id: " + id));
         return mapper.convertToDto(currency);
+    }
+
+    public List<Currency> findAll() {
+        return repository.findAll();
     }
 
     public Double convertValue(Long value, Long numCode) {
