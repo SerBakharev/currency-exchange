@@ -1,0 +1,12 @@
+#version: '3.8'
+services:
+  db:
+    container_name: pg_currency
+    image: postgres:16.2-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: currency_db
+    ports:
+      - "5432:5432"
