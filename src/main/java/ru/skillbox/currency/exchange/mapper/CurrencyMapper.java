@@ -5,6 +5,7 @@ import ru.skillbox.currency.exchange.dto.CurrencyDto;
 import ru.skillbox.currency.exchange.dto.ShortDto;
 import ru.skillbox.currency.exchange.dto.ShortDtoListResponse;
 import ru.skillbox.currency.exchange.entity.Currency;
+import ru.skillbox.currency.exchange.parsing.model.Valute;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,5 +28,16 @@ public interface CurrencyMapper {
         ShortDtoListResponse shortDtoListResponse = new ShortDtoListResponse();
         shortDtoListResponse.setCurrencies(response);
         return shortDtoListResponse;
+    }
+
+    default Currency convertFromXmlToEntity(Valute valute) {
+        Currency currency = new Currency();
+        currency.setName(valute.getName());
+        currency.setNominal((long) valute.getNominal());
+        currency.setValue(Double.parseDouble(valute.getValue().replace(',', '.')));
+        currency.setIsoNumCode(Long.valueOf(valute.getNumCode()));
+        currency.setIsoCharCode(valute.getCharCode());
+
+        return currency;
     }
 }

@@ -6,4 +6,8 @@ import ru.skillbox.currency.exchange.entity.Currency;
 public interface CurrencyRepository extends JpaRepository<Currency, Long> {
 
     Currency findByIsoNumCode(Long isoNumCode);
+
+    Boolean existsByIsoCharCode(String isoCharCode);
+
+    Currency findByIsoCharCode(String isoCharCode);
 }
